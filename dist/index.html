@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Explore the Galaxy | A Star Wars planet visualizer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Explore the Galaxy | A Star Wars planet visualizer">
+    <meta property="og:description" content="A fun experiment with d3.js and planet data from the Star Wars API">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://shorelle.net/planets">
+    <meta property="og:image" content="http://shorelle.net/planets/img/og-image.jpg">
+
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Space+Mono:400,700|Work+Sans:300,400,700">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <!--[if lte IE 9]>
+      <div class="browser-upgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience and security.</div>
+    <![endif]-->
+
+    <div id="stars"></div>
+
+    <header>
+      <div class="container">
+        <h1>Explore the galaxy</h1>
+        <div class="subtitle">Select your planet. Where would you like to go?</div>
+      </div>
+    </header>
+
+    <section class="loading">
+      <div class="angle">
+        <div class="holocron">
+          <div class="face front"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+          <div class="face back"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+          <div class="face bottom"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+          <div class="face top"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+          <div class="face left"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+          <div class="face right"><div class="circle-outer"><div class="square-outer"><div class="square-outer2"><div class="square-inner"><div class="circle-inner"></div></div></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="status">Loading Holonet...</div>
+    </section>
+
+    <section id="planets">
+      <div class="svg-container">
+        <svg class="svg-content">
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+            <feColorMatrix in="SourceAlpha" type="matrix" result="matrixOut" values="0 0 0 0 0 0 0 0 0 0.988 0 0 0 0 1 0 0 0 1 0" />
+            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="3" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+          </filter>
+          <defs>
+            <linearGradient id="alderaan" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(99,124,134)" />
+              <stop offset="100%" stop-color="rgb(136,166,190)" />
+            </linearGradient>
+            <linearGradient id="bespin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(203,122,70)" />
+              <stop offset="100%" stop-color="rgb(164,70,27)" />
+            </linearGradient>
+            <linearGradient id="bestine-iv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(68,130,173)" />
+              <stop offset="100%" stop-color="rgb(38,70,109)" />
+            </linearGradient>
+            <linearGradient id="chandrila" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(172,132,116)" />
+              <stop offset="100%" stop-color="rgb(137,123,103)" />
+            </linearGradient>
+            <linearGradient id="corellia" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(168,85,53)" />
+              <stop offset="100%" stop-color="rgb(83,96,110)" />
+            </linearGradient>
+            <linearGradient id="coruscant" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(26,12,14)" />
+              <stop offset="100%" stop-color="rgb(41,33,45)" />
+            </linearGradient>
+            <linearGradient id="dagobah" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(48,54,41)" />
+              <stop offset="100%" stop-color="rgb(97,101,81)" />
+            </linearGradient>
+            <linearGradient id="dantooine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(72,133,92)" />
+              <stop offset="100%" stop-color="rgb(138,198,158)" />
+            </linearGradient>
+            <linearGradient id="dathomir" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(139,40,53)" />
+              <stop offset="100%" stop-color="rgb(88,15,24)" />
+            </linearGradient>
+            <linearGradient id="dorin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(87,14,6)" />
+              <stop offset="100%" stop-color="rgb(141,70,25)" />
+            </linearGradient>
+            <linearGradient id="endor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(73,116,103)" />
+              <stop offset="100%" stop-color="rgb(45,70,71)" />
+            </linearGradient>
+            <linearGradient id="eriadu" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(141,143,154)" />
+              <stop offset="100%" stop-color="rgb(98,99,110)" />
+            </linearGradient>
+            <linearGradient id="felucia" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(104,91,55)" />
+              <stop offset="100%" stop-color="rgb(212,190,135)" />
+            </linearGradient>
+            <linearGradient id="geonosis" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(205,97,62)" />
+              <stop offset="100%" stop-color="rgb(93,26,15)" />
+            </linearGradient>
+            <linearGradient id="glee-anselm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(26,80,73)" />
+              <stop offset="100%" stop-color="rgb(46,157,136)" />
+            </linearGradient>
+            <linearGradient id="haruun-kal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(35,55,55)" />
+              <stop offset="100%" stop-color="rgb(143,166,166)" />
+            </linearGradient>
+            <linearGradient id="hoth" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(200,230,243)" />
+              <stop offset="100%" stop-color="rgb(238,244,248)" />
+            </linearGradient>
+            <linearGradient id="kalee" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(133,130,93)" />
+              <stop offset="100%" stop-color="rgb(167,166,146)" />
+            </linearGradient>
+            <linearGradient id="kamino" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(38,110,164)" />
+              <stop offset="100%" stop-color="rgb(11,60,111)" />
+            </linearGradient>
+            <linearGradient id="kashyyyk" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(93,131,127)" />
+              <stop offset="100%" stop-color="rgb(32,53,41)" />
+            </linearGradient>
+            <linearGradient id="malastare" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(112,119,81)" />
+              <stop offset="100%" stop-color="rgb(55,61,40)" />
+            </linearGradient>
+            <linearGradient id="mon-cala" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(11,15,24)" />
+              <stop offset="100%" stop-color="rgb(41,66,93)" />
+            </linearGradient>
+            <linearGradient id="mustafar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(57,8,7)" />
+              <stop offset="100%" stop-color="rgb(132,25,19)" />
+            </linearGradient>
+            <linearGradient id="muunilinst" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(181,210,126)" />
+              <stop offset="100%" stop-color="rgb(112,149,88)" />
+            </linearGradient>
+            <linearGradient id="mygeeto" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(205,198,221)" />
+              <stop offset="100%" stop-color="rgb(101,93,113)" />
+            </linearGradient>
+            <linearGradient id="naboo" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(48,149,139)" />
+              <stop offset="100%" stop-color="rgb(153,203,206)" />
+            </linearGradient>
+            <linearGradient id="nal-hutta" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(181,148,69)" />
+              <stop offset="100%" stop-color="rgb(110,108,54)" />
+            </linearGradient>
+            <linearGradient id="ord-mantell" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(150,136,107)" />
+              <stop offset="100%" stop-color="rgb(108,135,148)" />
+            </linearGradient>
+            <linearGradient id="rodia" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(59,91,38)" />
+              <stop offset="100%" stop-color="rgb(128,158,94)" />
+            </linearGradient>
+            <linearGradient id="ryloth" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(147,102,73)" />
+              <stop offset="100%" stop-color="rgb(87,60,49)" />
+            </linearGradient>
+            <linearGradient id="saleucami" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(166,140,93)" />
+              <stop offset="100%" stop-color="rgb(110,91,27)" />
+            </linearGradient>
+            <linearGradient id="sullust" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(59,41,39)" />
+              <stop offset="100%" stop-color="rgb(133,70,30)" />
+            </linearGradient>
+            <linearGradient id="tatooine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(108,84,76)" />
+              <stop offset="100%" stop-color="rgb(232,209,190)" />
+            </linearGradient>
+            <linearGradient id="toydaria" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(27,31,17)" />
+              <stop offset="100%" stop-color="rgb(68,68,38)" />
+            </linearGradient>
+            <linearGradient id="tund" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(150,77,42)" />
+              <stop offset="100%" stop-color="rgb(202,146,104)" />
+            </linearGradient>
+            <linearGradient id="utapau" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(161,154,114)" />
+              <stop offset="100%" stop-color="rgb(116,108,69)" />
+            </linearGradient>
+            <linearGradient id="vulpter" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(50,29,57)" />
+              <stop offset="100%" stop-color="rgb(119,65,119)" />
+            </linearGradient>
+            <linearGradient id="yavin-iv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgb(149,164,130)" />
+              <stop offset="100%" stop-color="rgb(99,147,114)" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <section class="planet-detail">
+      <div class="planet-title">
+        <h2></h2>
+        <a href="#" class="reset">Go back &times;</a>
+      </div>
+      <div class="planet-info">
+        <table>
+          <tr class="climate">
+            <td class="label">Climate</td>
+            <td class="value"></td>
+          </tr>
+          <tr class="gravity">
+            <td class="label">Gravity</td>
+            <td class="value"></td>
+          </tr>
+          <tr class="terrain">
+            <td class="label">Terrain</td>
+            <td class="value"></td>
+          </tr>
+          <tr class="population">
+            <td class="label">Population</td>
+            <td class="value"></td>
+          </tr>
+        </table>
+        <table>
+          <tr class="rotation">
+            <td class="label">Rotational period</td>
+            <td class="value"></td>
+          </tr>
+          <tr class="orbital">
+            <td class="label">Orbital period</td>
+            <td class="value"></td>
+          </tr>
+          <tr class="diameter">
+            <td class="label">Diameter</td>
+            <td class="value"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="planet-link">
+        <a href="#" target="_blank">Read more on Wookieepedia&nearr;</a>
+      </div>
+    </section>
+
+    <section class="error"></section>
+
+    <aside class="social">
+      <a href="#" id="twitter" class="button twitter" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i><span>Tweet</span></a>
+      <a href="https://github.com/shorelle/sw-planets" class="button github" target="_blank"><i class="fa fa-github" aria-hidden="true"></i><span>Github</span></a>
+    </aside>
+
+    <footer>
+      <i class="fa fa-rocket" aria-hidden="true"></i> brought to you by <a href="http://shorelle.net" target="_blank">shorelle.net</a> and <a href="http://swapi.co" target="_blank">star wars api</a>
+    </footer>
+
+    <noscript>
+      <div class="js-disabled">
+        This site requires a JavaScript enabled browser. Here are the <a href="http://enable-javascript.com" target="_blank"> instructions on how to enable JavaScript in your web browser</a>.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.min.js"></script>
+    <script src="//use.fontawesome.com/26f71c56d8.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+/* 
+ * Component - LoadingHolocron
+ * ========================================================================== */
+
+ /* Cube variables */
+$border-width: 6px;
+$size: 80px;
+$square-outer: sqrt(pow(($size + $border-width)/2,2) + pow(($size + $border-width)/2,2)) + px;
+$square-outer2: sqrt(pow(($size - $border-width*3)/2,2) + pow(($size - $border-width*3)/2,2)) + px;
+$square-inner: sqrt(pow(($size - $border-width*7)/2,2) + pow(($size - $border-width*7)/2,2)) + px;
+
+@mixin square($size) {
+  position: absolute;
+  height: $size;
+  width: $size;
+}
+
+/* Setup */
+.loading {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  perspective: 800px;
+  perspective-origin: 50% $size/2;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+
+  &.active {
+    z-index: 2;
+    opacity: 1;
+  }
+}
+
+.status {
+  margin-top: $size + $base-line-height;
+  font-family: $heading-font;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  animation: blink 1s linear infinite;
+}
+
+.angle { // angle entire cube
+  transform-style: preserve-3d;
+  position: relative;
+  transform: rotateX(-30deg);
+}
+
+.holocron {
+  width: $size;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  animation: spin 8s infinite linear;
+}
+
+/* Cube face components */
+.face {
+  @include square($size);
+  overflow: hidden;
+  background: rgba(0,198,255,0.7);
+  border: $border-width solid $primary-color;
+  transition: all 0.9s ease-in-out;
+}
+
+.circle-outer {
+  @include square($size - $border-width/2);
+  @include center();
+  border: $border-width/2 solid $primary-color;
+  border-radius: 50%;
+}
+
+.circle-inner {
+  @include square($square-inner);
+  @include center();
+  border: $border-width/2 solid $primary-color;
+  border-radius: 50%;
+}
+
+.square-outer {
+  @include square($square-outer);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+  border: $border-width solid $primary-color;
+}
+
+.square-outer2 {
+  @include square($square-outer2);
+  @include center();
+  border: $border-width/3 solid $primary-color;
+}
+
+.square-inner {
+  @include square($square-inner);
+  @include center();
+  border: $border-width/2 solid $primary-color;
+}
+
+/* Position cube faces */
+.back {
+  transform: translateZ(-1000px);
+
+  .active & {
+    transform: translateZ(-$size/2) rotateY(180deg);
+  }
+}
+
+.right {
+  transform: translateX(1000px);
+  transform-origin: top right;
+
+  .active & { transform: rotateY(-270deg) translateX($size/2); }
+}
+
+.left {
+  transform: translateX(-1000px);
+  transform-origin: center left;
+
+  .active & { transform: rotateY(270deg) translateX(-$size/2); }
+}
+
+.top {
+  transform: translateY(-1000px);
+  transform-origin: top center;
+
+  .active & { transform: rotateX(-90deg) translateY(-$size/2); }
+}
+
+.bottom {
+  transform: translateY(-1000px);
+  transform-origin: bottom center;
+
+  .active & { transform: rotateX(90deg) translateY($size/2); }
+}
+
+.front {
+  transform: translateZ(1000px);
+  
+  .active & { transform: translateZ($size/2); }
+}
+
+
+/* Animation */
+@keyframes spin {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(360deg); }
+}

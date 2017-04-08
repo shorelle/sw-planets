@@ -1,0 +1,40 @@
+/* 
+ * Browser & Javascript Status
+ * ========================================================================== */
+
+.browser-upgrade {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+  background: #ad0000;
+  text-align: center;
+
+  a {
+    color: $white;
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover { 
+      text-decoration: none;
+    }
+  }
+}
+
+.js-disabled {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 60%;
+  margin: 6em 20%;
+  text-align: center;
+}
+
+.no-js {
+  aside {
+    display: none;
+  }
+}

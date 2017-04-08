@@ -1,0 +1,25 @@
+/* 
+ * Typography
+ * ========================================================================== */
+
+body {
+  color: $text-color;
+}
+
+a {
+  color: $primary-color;
+  font-weight: normal;
+
+  &:hover {
+    color: lighten($primary-color, 10%);
+    text-decoration: none;
+  }
+}
+
+/* Headings */
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: $heading-font;
+  font-weight: normal;
+  color: $primary-color;
+}

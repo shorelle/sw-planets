@@ -1,0 +1,47 @@
+/* 
+ * Component - SVG
+ * ========================================================================== */
+
+.svg-container {
+    display: inline-block;
+    position: relative;;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+g.planet {
+    transition: opacity 0.5s ease-in-out;
+
+    &.active { 
+        opacity: 1;
+
+        text { opacity: 0; }
+    }
+
+    &.inactive { opacity: 0; }
+
+    &:hover,
+    &:active { 
+        cursor: pointer;
+        filter: url(#glow);
+    }
+}
+
+text {
+    fill: $white;
+    font-size: 0.3rem;
+    font-family: $heading-font;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

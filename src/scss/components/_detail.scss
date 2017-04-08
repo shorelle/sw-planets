@@ -1,0 +1,93 @@
+/* 
+ * Component - Planet Detail
+ * ========================================================================== */
+
+.planet-detail {
+  position: absolute;
+  z-index: 0;
+  left: 35%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &.active {
+    z-index: 2;
+    opacity: 1;
+
+    .planet-title:after {
+      width: 100%;
+    }
+  }
+
+  .planet-title {
+    @include float();
+    @include vr-margin(0 0 1);
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: $yellow;
+      transition: width 0.5s ease;
+    }
+
+    h2 {
+      @include vr-margin(0 0 $mod-xxs);
+      float: left;
+    }
+
+    a {
+      @include vr-line-height($h2-font-size);
+      @include vr-margin(1 0 0);
+      display: inline-block;
+      float: right;
+      font-family: $heading-font;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      &:hover { color: darken($yellow, 15%); }
+    }
+  }
+
+  .planet-info {
+    @include float();
+    @include vr-margin(0 0 $mod-s);
+    font-weight: 300;
+
+    table {
+      float: left;
+      width: 50%;
+
+      td { 
+        @include vr-padding(0 0 $mod-xs);
+        vertical-align: top;
+      }
+
+      .label {
+        padding-right: 1.5em;
+        text-align: right;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .value {
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .planet-link {
+    @include float();
+    font-family: $heading-font;
+
+    a:hover {
+      color: darken($yellow, 15%);
+    }
+  }
+}

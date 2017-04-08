@@ -1,0 +1,24 @@
+/* 
+ * Component - Footer
+ * ========================================================================== */
+
+footer {
+  @include vr-margin(1);
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  font-family: $heading-font;
+  font-size: 0.75rem;
+  text-align: right;
+  color: rgba(255,255,255,0.6);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

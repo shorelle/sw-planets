@@ -1,0 +1,33 @@
+/* 
+ * Global
+ * ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  background: $offblack;
+  color: $white;
+  overflow: hidden;
+}
+
+.container {
+  @include container();
+}
+
+#planets {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

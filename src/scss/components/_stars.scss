@@ -1,0 +1,48 @@
+/* 
+ * Component - Stars
+ * ========================================================================== */
+
+#stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255,255,255,0.0);
+  border-radius: 5px;
+}
+
+@for $i from 1 through 100 {
+  .star:nth-child(#{$i}) {
+    top: percentage(random());
+    left: percentage(random());
+    animation: random(5) + 5s linear random(5) + 1s infinite twinkle;
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    transform: scale(1, 1);
+    background: rgba(255,255,255,0.0);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: scale(0.8, 0.8);
+    background: rgba(255,255,255,1);
+    animation-timing-function: ease-out;
+  }
+  80% {
+    background: rgba(255,255,255,0.00);
+    transform: scale(1, 1);
+  }
+  100% {
+    background: rgba(255,255,255,0.0);
+    transform: scale(1, 1);
+  }
+}

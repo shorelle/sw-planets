@@ -1,0 +1,22 @@
+/* 
+ * Component - Error
+ * ========================================================================== */
+
+.error {
+  @include vr-font-size($h3-font-size);
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  font-family: $heading-font;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &.active {
+    z-index: 2;
+    opacity: 1;
+  }
+}
