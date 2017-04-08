@@ -5,7 +5,7 @@
 const $            = require('gulp-load-plugins')();
 const gulp         = require('gulp');
 
-const argv         = require('yargs');
+const argv         = require('yargs').argv;
 const autoprefixer = require('autoprefixer');
 const babelify     = require('babelify');
 const browserify   = require('browserify');
