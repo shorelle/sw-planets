@@ -8,9 +8,8 @@ import Util from './modules/util';
 
 jQuery(document).ready( ($) => {
 
-  // Initial states
+  // JS enabled
   $('html').removeClass('no-js');
-  $('.loading').addClass('active');
 
   // Create stars
   Theme.stars();

@@ -26,7 +26,7 @@ const paths = {
  * Deletes processed files.
  */
 gulp.task('clean', () => {
-  return gulp.src(paths.dist, {read: false})
+  return gulp.src([paths.dist + '/**/*', '!dist/.git/**'])
     .pipe($.plumber())
     .pipe($.clean());
 });

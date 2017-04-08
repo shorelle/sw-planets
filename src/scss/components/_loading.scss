@@ -24,7 +24,7 @@ $square-inner: sqrt(pow(($size - $border-width*7)/2,2) + pow(($size - $border-wi
   perspective: 800px;
   perspective-origin: 50% $size/2;
   opacity: 0;
-  transition: all 0.5s ease-in-out;
+  transition: all 1s ease-in-out;
 
   &.active {
     z-index: 2;
