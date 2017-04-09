@@ -11,6 +11,7 @@ const babelify     = require('babelify');
 const browserify   = require('browserify');
 const browserSync  = require('browser-sync').create();
 const buffer       = require('vinyl-buffer');
+const del          = require('del');
 const source       = require('vinyl-source-stream');
 const runSequence  = require('run-sequence');
 const watchify     = require('watchify');
@@ -26,9 +27,7 @@ const paths = {
  * Deletes processed files.
  */
 gulp.task('clean', () => {
-  return gulp.src([paths.dist + '/**', '!dist/.git/**'])
-    .pipe($.plumber())
-    .pipe($.clean());
+  return del.sync([paths.dist + '/**/*', '!' + paths.dist + '/.git']);
 });
 
 /*
