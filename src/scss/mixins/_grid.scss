@@ -8,7 +8,8 @@ $breakpoints: (
   'mobile': (max-width: 667px),
   'tablet-portrait': (max-width: 768px),
   'tablet-landscape': (max-width: 1024px),
-  'desktop': (min-width: 1200px),
+  'not-mobile': (min-width: 667px),
+  'desktop': (min-width: 1200px)
 );
 
 // Breakpoints Grid Settings
@@ -17,26 +18,27 @@ $grid-settings: (
   base: (
     container-columns: 12,
     gutter: 1%,
-    max-width: 960px,
+    max-width: 1000px
   ),
   desktop: (
     container-columns: 12,
     gutter: 1%,
-    max-width: 1100px,
+    max-width: 1100px
   ),
   tablet-landscape: (
     container-columns: 12,
     gutter: 2%,
-    max-width: 750px,
+    max-width: 90%
   ),
   tablet-portrait: (
     container-columns: 12,
     gutter: 5%,
-    max-width: 650px,
+    max-width: 90%
   ),
   mobile: (
     container-columns: 1,
     gutter: 5%,
+    max-width: 90%
   )
 );
 

@@ -25,8 +25,15 @@ jQuery(document).ready( ($) => {
     $('.loading').removeClass('active');
     $('header, footer').delay(2000).addClass('active');
 
-    const HEIGHT = 700,
-          WIDTH = HEIGHT * 1.4;
+    let HEIGHT = 700,
+        WIDTH = HEIGHT * 1.4;
+
+    // Account for portrait orientation
+    if (window.innerWidth < window.innerHeight) {
+      WIDTH = 700;
+      HEIGHT = WIDTH * 1.4;
+    }
+
     let maxRadius = 0,
         minRadius = Number.MAX_VALUE;
 

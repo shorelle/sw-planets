@@ -24,6 +24,10 @@ aside.social {
     font-size: 0.75rem;
     transition: all 0.2s ease;
 
+    @include respond-to('mobile') {
+      right: 0;
+    }
+
     i {
       margin-right: 0.4rem;
     }
@@ -31,6 +35,10 @@ aside.social {
     span {
       display: inline-block;
       margin-right: 10px;
+
+      @include respond-to('mobile') {
+        margin-right: 0;
+      }
     }
 
     &:hover {

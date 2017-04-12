@@ -28,6 +28,24 @@ body {
   }
 }
 
+@include respond-to('mobile') {
+  .hide-mobile {
+    display: none;
+  }
+  .show-mobile {
+    display: block;
+  }
+}
+
+@include respond-to('not-mobile') {
+  .hide-mobile {
+    display: block;
+  }
+  .show-mobile {
+    display: none;
+  }
+}
+
 @keyframes blink {
   50% { opacity: 0; }
 }

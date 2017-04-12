@@ -8,9 +8,19 @@
   left: 35%;
   top: 50%;
   transform: translateY(-50%);
-  width: 40%;
+  width: 55%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+
+  @include respond-to('desktop') {
+    width: 40%;
+  }
+
+  @include respond-to('mobile') {
+    left: 10%;
+    width: 80%;
+    font-size: 0.8rem;
+  }
 
   &.active {
     z-index: 2;
