@@ -87,7 +87,7 @@ gulp.task('js', () => {
 
   const props = {
     entries: [paths.src + '/js/' + filename +'.js'],
-    debug : true,
+    debug: true,
     cache: {},
     packageCache: {}
   };
